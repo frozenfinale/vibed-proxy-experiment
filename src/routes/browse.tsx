@@ -5,7 +5,7 @@ import { PortalChrome } from "@/components/PortalChrome";
 import { normalizeInput, prettyHost, toProxyPath } from "@/lib/proxy-url";
 import { useBookmarks, useSettings } from "@/lib/portal-store";
 
-type BrowseSearch = { url?: string };
+type BrowseSearch = { url?: string | undefined };
 
 export const Route = createFileRoute("/browse")({
   validateSearch: (search: Record<string, unknown>): BrowseSearch => ({
