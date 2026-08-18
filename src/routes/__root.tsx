@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { useSettings } from "../lib/portal-store";
 
 function NotFoundComponent() {
   return (
@@ -118,6 +119,21 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const { value: settings, hydrated } = useSettings();
+
+  useEffect(() => {
+    if (!hydrated) return;
+    if (settings.cloakTitle) document.title = settings.cloakTitle;
+    if (settings.cloakIcon) {
+      let link = document.querySelector<HTMLLinkElement>("link[rel='icon']");
+      if (!link) {
+        link = document.createElement("link");
+        link.rel = "icon";
+        document.head.appendChild(link);
+      }
+      link.href = settings.cloakIcon;
+    }
+  }, [hydrated, settings.cloakTitle, settings.cloakIcon]);
 
   return (
     <QueryClientProvider client={queryClient}>
