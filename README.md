@@ -1,7 +1,6 @@
 # Proxy Buddy
 
-build a proxy similar to scramjet
-
+i want to make it clear this is vibed (vibecoded)
 This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable
