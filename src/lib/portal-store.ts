@@ -10,6 +10,7 @@ export type PortalSettings = {
 };
 
 export const SEARCH_ENGINES: { label: string; template: string }[] = [
+  { label: "SearXNG (priv.au)", template: "https://priv.au/search?q=%s" },
   { label: "DuckDuckGo", template: "https://duckduckgo.com/?q=%s" },
   { label: "Bing", template: "https://www.bing.com/search?q=%s" },
   { label: "Google", template: "https://www.google.com/search?q=%s" },
