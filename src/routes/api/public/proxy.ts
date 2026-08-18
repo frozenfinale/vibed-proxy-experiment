@@ -2,11 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { rewriteCss, rewriteHtml } from "@/lib/proxy-rewrite.server";
 
-const BLOCKED_HOST = /^(localhost|127\.|0\.|10\.|192\.168\.|169\.254\.|172\.(1[6-9]|2\d|3[01])\.|\[?::1\]?|.*\.local)$/i;
+const BLOCKED_HOST =
+  /^(localhost|\[?::1\]?|127\.\d+\.\d+\.\d+|0\.\d+\.\d+\.\d+|10\.\d+\.\d+\.\d+|192\.168\.\d+\.\d+|169\.254\.\d+\.\d+|172\.(1[6-9]|2\d|3[01])\.\d+\.\d+|.*\.local|.*\.internal)$/i;
 
 function isBlocked(host: string): boolean {
   const h = host.toLowerCase().replace(/:\d+$/, "");
-  return BLOCKED_HOST.test(h) || h.startsWith("10.") || h.startsWith("192.168.");
+  return BLOCKED_HOST.test(h);
 }
 
 const HOP_BY_HOP = new Set([
