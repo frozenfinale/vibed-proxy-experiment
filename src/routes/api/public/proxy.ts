@@ -66,7 +66,10 @@ async function handle(request: Request): Promise<Response> {
     upstream = await fetch(parsed.toString(), {
       method: request.method,
       headers: outboundHeaders,
-      body: request.method === "GET" || request.method === "HEAD" ? undefined : await request.arrayBuffer(),
+      body:
+        request.method === "GET" || request.method === "HEAD"
+          ? null
+          : new Uint8Array(await request.arrayBuffer()),
       redirect: "follow",
     });
   } catch (error) {
